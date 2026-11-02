@@ -1,0 +1,16 @@
+web_search = "disabled"
+model_reasoning_summary = "none"
+model = "gpt-oss:20b"
+model_provider = "llm7"
+
+[model_providers.llm7]
+name = "LLM7"
+base_url = "https://api.llm7.io/v1"
+env_key = "LLM7_API_KEY"
+wire_api = "responses"
+
+[features]
+multi_agent = false
+goals = false
+image_generation = false
+apps = false

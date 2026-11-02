@@ -1,15 +1,15 @@
 # Codex CLI dengan API LLM gratis
 
 Diuji 2026-11-02 dengan `codex-cli 0.166.0`. Referensi upstream
-(`repo/awesome-freellm-apis/code-examples/codex.md`) menyarankan `OPENAI_BASE_URL` +
-`OPENAI_API_KEY`; cara itu **sudah usang** untuk versi ini. Gunakan `config.toml`.
+(`code-examples/codex.md` di https://github.com/open-free-llm-api/awesome-freellm-apis) menyarankan `OPENAI_BASE_URL` +
+`OPENAI_API_KEY`; cara itu sudah usang untuk versi ini. Gunakan `config.toml`.
 
 ## Ringkasan hasil uji
 
 | Provider | Status | Catatan |
 |---|---|---|
-| OpenRouter | **Jalan** | `nvidia/nemotron-3.5-lightning:free` menjawab. Model `:free` sering 429 / berganti. |
-| Groq | **Tidak jalan** | `/responses` Groq menolak body request Codex (`invalid JSON body`). Lihat di bawah. |
+| OpenRouter | Jalan | `nvidia/nemotron-3.5-lightning:free` menjawab. Model `:free` sering 429 / berganti. |
+| Groq | Tidak jalan | `/responses` Groq menolak body request Codex (`invalid JSON body`). Lihat di bawah. |
 
 ## Cara pakai (OpenRouter)
 
@@ -50,8 +50,8 @@ apps = false
 
 Diselidiki dengan menangkap body yang dikirim Codex lalu mengulangnya ke Groq:
 
-1. `reasoning.summary` ditolak -> diatasi `model_reasoning_summary = "none"`.
-2. Tool non-`function` (`web_search`, namespace `multi_agent_v1`) ditolak -> diatasi dengan
+1. `reasoning.summary` ditolak. Diatasi dengan `model_reasoning_summary = "none"`.
+2. Tool non-`function` (`web_search`, namespace `multi_agent_v1`) ditolak. Diatasi dengan
    `web_search = "disabled"` dan `multi_agent = false`.
 3. Setelah itu Groq masih menolak: `unknown field client_metadata` dan masih `invalid JSON body`
    walau field itu dibuang. Penyebab sisanya belum ditemukan; tidak bisa diatur lewat config.

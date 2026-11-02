@@ -1,0 +1,21 @@
+# Proxy lokal: Claude Code (Anthropic Messages API) -> provider OpenAI-compatible.
+# Key dibaca dari environment (diisi oleh proxy.sh dari secrets/*.env).
+model_list:
+  - model_name: llm7-nemotron
+    litellm_params:
+      model: openai/nemotron-3-nano:30b
+      api_base: https://api.llm7.io/v1
+      api_key: os.environ/LLM7_API_KEY
+  - model_name: llm7-gpt-oss
+    litellm_params:
+      model: openai/gpt-oss:20b
+      api_base: https://api.llm7.io/v1
+      api_key: os.environ/LLM7_API_KEY
+  - model_name: groq-gpt-oss
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      additional_drop_params: ["prompt_cache_key", "cache_control"]
+      api_key: os.environ/GROQ_API_KEY
+
+litellm_settings:
+  drop_params: true        # buang parameter Anthropic yang tidak dikenal backend
